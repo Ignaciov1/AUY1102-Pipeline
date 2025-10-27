@@ -12,7 +12,7 @@ jobs:
   sonarcloud:
     name: SonarCloud Scan
     runs-on: ubuntu-latest
-    
+
     steps:
       # 1. Descarga tu código
       - uses: actions/checkout@v3
@@ -27,11 +27,11 @@ jobs:
       - name: Run Tests and Generate Coverage
         run: npm run test:unit -- --coverage
 
-      # 4. (NUEVO) ¡LISTAR ARCHIVOS DE COBERTURA!
-      #    Este paso nos mostrará dónde se guardó el reporte
+      # 4. (¡NUEVO PASO DE DEPURACIÓN!)
+      #    Esto listará los archivos en la carpeta de cobertura
       - name: List Coverage Directory
         run: ls -R coverage
-        
+
       # 5. Ejecuta el análisis de SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
