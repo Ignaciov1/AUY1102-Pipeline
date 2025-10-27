@@ -30,11 +30,11 @@ jobs:
 
       # 4. Ejecuta el análisis de SonarCloud
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2  # <-- Acción correcta y estable
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=Ignaciov1
+            -Dsonar.organization=ignaciov1
             -Dsonar.projectKey=Ignaciov1_AUY1102-Pipeline
