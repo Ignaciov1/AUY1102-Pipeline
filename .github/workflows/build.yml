@@ -1,19 +1,19 @@
 # Nombre del Workflow
 name: Build, Test and SonarCloud Analysis
 
-
+# Cuándo se debe ejecutar
 on:
   push:
     branches:
-      - main  
+      - main  # Asegúrate que esta sea tu rama principal
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   sonarcloud:
     name: SonarCloud Scan
-    runs-on: ubuntu-latest 
-    
+    runs-on: ubuntu-latest # Usará una máquina virtual de Linux
+
     steps:
       # 1. Descarga tu código
       - uses: actions/checkout@v3
@@ -32,5 +32,5 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
