@@ -1,0 +1,37 @@
+# Nombre del Workflow
+name: Build, Test and SonarCloud Analysis
+
+# Cuándo se debe ejecutar
+on:
+  push:
+    branches:
+      - main  # Asegúrate que esta sea tu rama principal
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest # Usará una máquina virtual de Linux
+    
+    steps:
+      # 1. Descarga tu código
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # 2. Instala las dependencias (el npm install)
+      - name: Install Dependencies
+        run: npm install
+
+      # 3. EJECUTA LAS PRUEBAS y GENERA LA COBERTURA
+      #    (Este es el paso que faltaba)
+      - name: Run Tests and Generate Coverage
+        run: npm run test:unit -- --coverage
+
+      # 4. Ejecuta el análisis de SonarCloud
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token de GitHub (automático)
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # El token que configuraste
