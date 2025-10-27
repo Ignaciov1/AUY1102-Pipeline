@@ -12,7 +12,7 @@ jobs:
   sonarcloud:
     name: SonarCloud Scan
     runs-on: ubuntu-latest
-    
+
     steps:
       # 1. Descarga tu código
       - uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
       # 3. EJECUTA LAS PRUEBAS y GENERA LA COBERTURA
       - name: Run Tests and Generate Coverage
         run: npm run test:unit -- --coverage
-        
+
       # 4. Ejecuta el análisis de SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
