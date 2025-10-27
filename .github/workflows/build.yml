@@ -5,7 +5,7 @@ name: Build, Test and SonarCloud Analysis
 on:
   push:
     branches:
-      - master  # Asegúrate que esta sea tu rama principal
+      - master  # <-- Arreglado para tu rama
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -13,7 +13,7 @@ jobs:
   sonarcloud:
     name: SonarCloud Scan
     runs-on: ubuntu-latest # Usará una máquina virtual de Linux
-
+    
     steps:
       # 1. Descarga tu código
       - uses: actions/checkout@v3
@@ -30,7 +30,11 @@ jobs:
 
       # 4. Ejecuta el análisis de SonarCloud
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@v2  # <-- Acción correcta y estable
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=Ignaciov1
+            -Dsonar.projectKey=Ignaciov1_AUY1102-Pipeline
