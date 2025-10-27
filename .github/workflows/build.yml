@@ -38,3 +38,4 @@ jobs:
           args: >
             -Dsonar.organization=ignaciov1
             -Dsonar.projectKey=Ignaciov1_AUY1102-Pipeline
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
