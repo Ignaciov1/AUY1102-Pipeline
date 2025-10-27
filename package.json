@@ -42,7 +42,7 @@
     "prepare": "is-ci || husky install",
     "prepublishOnly": "npm run build:ci",
     "sort": "sort-package-json package.json",
-    "test:unit": "jest --passWithNoTests --coverage",
+    "test:unit": "jest --passWithNoTests --coverage --coverageReporters=lcov",
     "test:coverage": "jest --coverage",
     "test:dev": "jest --verbose --colors --expand --maxWorkers=50% --detectOpenHandles --errorOnDeprecated --bail",
     "test:watch": "jest --watch --verbose --colors --expand --maxWorkers=25%",
