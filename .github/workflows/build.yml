@@ -1,18 +1,17 @@
 # Nombre del Workflow
 name: Build, Test and SonarCloud Analysis
 
-# Cuándo se debe ejecutar
 on:
   push:
     branches:
-      - master  # <-- Arreglado para tu rama
+      - master
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   sonarcloud:
     name: SonarCloud Scan
-    runs-on: ubuntu-latest # Usará una máquina virtual de Linux
+    runs-on: ubuntu-latest
     
     steps:
       # 1. Descarga tu código
@@ -20,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2. Instala las dependencias (el npm install)
+      # 2. Instala las dependencias
       - name: Install Dependencies
         run: npm install
 
@@ -28,7 +27,12 @@ jobs:
       - name: Run Tests and Generate Coverage
         run: npm run test:unit -- --coverage
 
-      # 4. Ejecuta el análisis de SonarCloud
+      # 4. (NUEVO) ¡LISTAR ARCHIVOS DE COBERTURA!
+      #    Este paso nos mostrará dónde se guardó el reporte
+      - name: List Coverage Directory
+        run: ls -R coverage
+        
+      # 5. Ejecuta el análisis de SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
